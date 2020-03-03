@@ -12,6 +12,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Batex Energy"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAdEeBOmFBVpP7hUFcLull7oAmzup1wsdg"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -15,9 +15,9 @@ class AllData extends StatelessWidget {
         ),
         backgroundColor: Colors.grey[200],
       ),
-      url: "https://smartbms.000webhostapp.com/",
+      url: "https://smart-street-light.000webhostapp.com/",
       // withJavascript: true,
-      withZoom: false,
+      // withZoom: false,
     );
   }
 }

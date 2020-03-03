@@ -7,6 +7,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'all_data.dart';
 import 'battery_data.dart';
 import 'image_controller.dart';
+import 'maps.dart';
+
 
 class Home extends StatelessWidget {
   @override
@@ -60,7 +62,7 @@ class Home extends StatelessWidget {
                                   height: 4.0,
                                 ),
                                 Text(
-                                  batteryData.currentLogic(batteryData.c1, 0),
+                                  batteryData.currentLogic(batteryData.c, 0),
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
@@ -73,7 +75,7 @@ class Home extends StatelessWidget {
                             builder: (BuildContext context,
                                 ImageController imageController, Widget child) {
                               return Image.asset(
-                                imageController.arrowLogic(batteryData.c1, 0),
+                                imageController.arrowLogic(batteryData.c, 0),
                                 width: 30.0,
                               );
                             },
@@ -102,7 +104,7 @@ class Home extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      batteryData.t1 + ' V of 13.4 V',
+                                      batteryData.t + ' V of 13.4 V',
                                       style: TextStyle(fontSize: 11.0),
                                     ),
                                   ],
@@ -114,7 +116,7 @@ class Home extends StatelessWidget {
                             builder: (BuildContext context,
                                 ImageController imageController, Widget child) {
                               return Image.asset(
-                                imageController.arrowLogic(batteryData.c1, 1),
+                                imageController.arrowLogic(batteryData.c, 1),
                                 width: 30.0,
                               );
                             },
@@ -128,7 +130,7 @@ class Home extends StatelessWidget {
                                       ImageController imageController,
                                       Widget child) {
                                     return Image.asset(
-                                      imageController.loadLogic(batteryData.c1),
+                                      imageController.loadLogic(batteryData.c),
                                       width: 45.0,
                                     );
                                   },
@@ -137,7 +139,7 @@ class Home extends StatelessWidget {
                                   height: 4.0,
                                 ),
                                 Text(
-                                  batteryData.currentLogic(batteryData.c1, 1),
+                                  batteryData.currentLogic(batteryData.c, 1),
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
@@ -187,7 +189,7 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 42.0),
                               child: Text(
-                                'Cell 1: ' + batteryData.vc1 + ' V',
+                                'Cell 1: ' + batteryData.v1 + ' V',
                               ),
                             ),
                           ],
@@ -205,7 +207,7 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 42.0),
                               child: Text(
-                                'Cell 2: ' + batteryData.vc2 + ' V',
+                                'Cell 2: ' + batteryData.v2 + ' V',
                               ),
                             ),
                           ],
@@ -223,7 +225,7 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 42.0),
                               child: Text(
-                                'Cell 3: ' + batteryData.vc3 + ' V',
+                                'Cell 3: ' + batteryData.v3 + ' V',
                               ),
                             ),
                           ],
@@ -241,7 +243,7 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 42.0),
                               child: Text(
-                                'Cell 4: ' + batteryData.vc4 + ' V',
+                                'Cell 4: ' + batteryData.v4 + ' V',
                               ),
                             ),
                           ],
@@ -279,7 +281,7 @@ class Home extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 42.0),
                               child: Text(
-                                'Sensor 1: ' + batteryData.temp + '°C',
+                                'Sensor 1: ' + batteryData.t + '°C',
                               ),
                             ),
                           ],
@@ -310,6 +312,24 @@ class Home extends StatelessWidget {
                                   builder: (context) => AllData()));
                             },
                           ),
+                          MaterialButton(
+                            color: Colors.grey[200],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0)),
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.insert_chart),
+                                SizedBox(
+                                  width: 8.0,
+                                ),
+                                Text("Maps"),
+                              ],
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Maps()));
+                            },
+                          )
                         ],
                       ),
                     ],
