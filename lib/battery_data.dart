@@ -22,6 +22,7 @@ class BatteryData with ChangeNotifier {
   String percentage = '0';
   String power = '0';
   bool loading = false;
+  bool initialRunLogic = true;
   BuildContext context;
 
   var data;
@@ -32,6 +33,18 @@ class BatteryData with ChangeNotifier {
   void setLoading() {
     loading = true;
     notifyListeners();
+  }
+
+  bool initialRun() {
+    if (initialRunLogic) {
+      setLoading();
+      downloadData();
+      if (!loading) {
+        return true;
+      }
+    }
+      return false;
+    
   }
 
   Future downloadData() async {
