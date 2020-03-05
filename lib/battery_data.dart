@@ -1,34 +1,39 @@
-// import 'dart:async';
+import 'dart:async';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BatteryData with ChangeNotifier {
-  String user_id = '0';
-  String device_id = '0';
+  String userId = '0';
+  String deviceId = '0';
   String v1 = '0';
   String v2 = '0';
   String v3 = '0';
   String v4 = '0';
-  String v_tot = '0';
+  String vTot = '0';
   String c = '0';
   String t = '0';
-  String c_off = '0';
+  String cOff = '0';
   String date = '0';
   String lat = '0';
   String lng = '0';
   String percentage = '0';
   String power = '0';
+  String url =
+      'http://smart-street-light.000webhostapp.com/read_data.php?device_id=';
   bool loading = false;
   bool initialRunLogic = true;
   BuildContext context;
 
   var data;
 
-  final String url =
-      'http://smart-street-light.000webhostapp.com/read_data.php?device_id=1';
+  void setId(String id) {
+    print(url);
+    notifyListeners();
+  }
 
   void setLoading() {
     loading = true;
@@ -43,13 +48,14 @@ class BatteryData with ChangeNotifier {
         return true;
       }
     }
-      return false;
-    
+    return false;
   }
 
   Future downloadData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    print(url);
     var response =
-        await http.get(url).timeout(Duration(seconds: 10), onTimeout: () {
+        await http.get(url + preferences.getString("deviceId")).timeout(Duration(seconds: 10), onTimeout: () {
       print('to');
       loading = false;
       Fluttertoast.showToast(msg: "Request Timeout!");
@@ -61,27 +67,27 @@ class BatteryData with ChangeNotifier {
       data = json.decode(response.body)['0'];
 
       loading = false;
-      user_id = double.parse(data['user_id']).toString();
-      device_id = double.parse(data['device_id']).toString();
+      userId = double.parse(data['user_id']).toString();
+      deviceId = double.parse(data['device_id']).toString();
       v1 = double.parse(data['v1']).toStringAsFixed(2);
       v2 = double.parse(data['v2']).toStringAsFixed(2);
       v3 = double.parse(data['v3']).toStringAsFixed(2);
       v4 = double.parse(data['v4']).toStringAsFixed(2);
-      v_tot = double.parse(data['v_tot']).toStringAsFixed(2);
+      vTot = double.parse(data['v_tot']).toStringAsFixed(2);
       c = double.parse(data['c']).toStringAsFixed(2);
       t = double.parse(data['t']).toStringAsFixed(2);
       date = data['date'];
       lat = double.parse(data['lat']).toStringAsFixed(6);
       lng = double.parse(data['lng']).toStringAsFixed(6);
 
-      double e = ((double.parse(v_tot) / 13.4) * 100);
+      double e = ((double.parse(vTot) / 13.4) * 100);
       if (e > 100) {
         percentage = '100';
       } else {
         percentage = e.toStringAsFixed(0);
       }
       //0.92 is value of efficiency
-      power = ((double.parse(v_tot)) * (double.parse(c).abs() * 0.92))
+      power = ((double.parse(vTot)) * (double.parse(c).abs() * 0.92))
           .toStringAsFixed(2);
 
       print(data);
