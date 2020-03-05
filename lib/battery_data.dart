@@ -25,7 +25,7 @@ class BatteryData with ChangeNotifier {
   String url =
       'http://smart-street-light.000webhostapp.com/read_data.php?device_id=';
   bool loading = false;
-  bool initialRunLogic = true;
+  bool initialRunLogic = false;
   BuildContext context;
 
   var data;
@@ -40,22 +40,12 @@ class BatteryData with ChangeNotifier {
     notifyListeners();
   }
 
-  bool initialRun() {
-    if (initialRunLogic) {
-      setLoading();
-      downloadData();
-      if (!loading) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   Future downloadData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     print(url);
-    var response =
-        await http.get(url + preferences.getString("deviceId")).timeout(Duration(seconds: 10), onTimeout: () {
+    var response = await http
+        .get(url + preferences.getString("deviceId"))
+        .timeout(Duration(seconds: 10), onTimeout: () {
       print('to');
       loading = false;
       Fluttertoast.showToast(msg: "Request Timeout!");

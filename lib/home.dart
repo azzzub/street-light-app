@@ -9,8 +9,12 @@ import 'battery_data.dart';
 import 'image_controller.dart';
 import 'maps.dart';
 
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-class Home extends StatelessWidget {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -22,8 +26,6 @@ class Home extends StatelessWidget {
       ],
       child: Consumer<BatteryData>(
         builder: (BuildContext context, BatteryData batteryData, Widget child) {
-          print('ulang');
-
           return ModalProgressHUD(
             progressIndicator: CircularProgressIndicator(
               backgroundColor: Colors.red[900],
@@ -40,10 +42,20 @@ class Home extends StatelessWidget {
                         padding: EdgeInsets.only(
                           left: 16.0,
                           top: 16.0,
-                          bottom: 12.0,
+                          bottom: 5.0,
                         ),
                         child: Text(
                           'Last Update: ' + batteryData.date,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 16.0,
+                          bottom: 12.0,
+                        ),
+                        child: Text(
+                          'Device ID: ' + batteryData.deviceId,
                           style: TextStyle(fontSize: 14.0),
                         ),
                       ),
@@ -312,24 +324,33 @@ class Home extends StatelessWidget {
                                   builder: (context) => AllData()));
                             },
                           ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 4.0,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
                           MaterialButton(
                             color: Colors.grey[200],
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0)),
                             child: Row(
                               children: <Widget>[
-                                Icon(Icons.insert_chart),
+                                Icon(Icons.location_on),
                                 SizedBox(
                                   width: 8.0,
                                 ),
-                                Text("Maps"),
+                                Text("Street Light Locations"),
                               ],
                             ),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => Maps()));
                             },
-                          )
+                          ),
                         ],
                       ),
                     ],
