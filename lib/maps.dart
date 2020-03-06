@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,111 +58,116 @@ class _MapsState extends State<Maps> {
       ],
       child: Consumer<BatteryData>(
         builder: (BuildContext context, BatteryData batteryData, Widget child) {
-          print(batteryData.loading);
-          return Scaffold(
-            appBar: AppBar(
-              iconTheme: IconThemeData(color: Colors.black),
-              brightness: Brightness.light,
-              title: Text(
-                'Your Street Light Location',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              backgroundColor: Colors.grey[200],
-            ),
-            body: Stack(
-              children: <Widget>[
-                GoogleMap(
-                  myLocationEnabled: true,
-                  compassEnabled: true,
-                  tiltGesturesEnabled: false,
-                  mapType: MapType.normal,
-                  markers: {sl1, sl2},
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(
-                        double.parse("-7.550676"), double.parse("110.828316")),
-                    zoom: 11,
-                  ),
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                  onTap: (LatLng location) {
-                    setState(() {
-                      pinPillPosition = -200;
-                    });
-                  },
+          return
+              // Scaffold(
+              //   appBar: AppBar(
+              //     iconTheme: IconThemeData(color: Colors.black),
+              //     brightness: Brightness.light,
+              //     title: Text(
+              //       'Your Street Light Location',
+              //       style:
+              //           TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              //     ),
+              //     backgroundColor: Colors.grey[200],
+              //   ),
+              //   body:
+              Stack(
+            children: <Widget>[
+              GoogleMap(
+                myLocationEnabled: true,
+                compassEnabled: true,
+                tiltGesturesEnabled: false,
+                mapType: MapType.normal,
+                markers: {sl1, sl2},
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(
+                      double.parse("-7.550676"), double.parse("110.828316")),
+                  zoom: 11,
                 ),
-                AnimatedPositioned(
-                  bottom: pinPillPosition,
-                  right: 0,
-                  left: 0,
-                  duration: Duration(milliseconds: 200),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: EdgeInsets.all(20),
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              blurRadius: 20,
-                              offset: Offset.zero,
-                              color: Colors.grey.withOpacity(0.5))
-                        ],
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(20.0, 5.0, 5.0, 5.0),
-                            child: CircleAvatar(
-                              child: Image.asset('/images/streetLightAva.png'),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+                onTap: (LatLng location) {
+                  setState(() {
+                    pinPillPosition = -200;
+                  });
+                },
+              ),
+              AnimatedPositioned(
+                bottom: pinPillPosition,
+                right: 0,
+                left: 0,
+                duration: Duration(milliseconds: 200),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.all(20),
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            blurRadius: 20,
+                            offset: Offset.zero,
+                            color: Colors.grey.withOpacity(0.5))
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          width: 60.0,
+                          height: 50.0,
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/images/streetLightAva.jpg',
+                              fit: BoxFit.fill,
                             ),
                           ),
-                          Container(
-                            width: 100.0,
-                            child: Text(
-                              mapsMarker,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
+                        ),
+                        Container(
+                          width: 100.0,
+                          child: Text(
+                            mapsMarker,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
-                          MaterialButton(
-                            color: Colors.grey[200],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.list),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                Text("Details"),
-                              ],
-                            ),
-                            onPressed: () {
-                              setState(
-                                () async {
-                                  SharedPreferences preferences =
-                                      await SharedPreferences.getInstance();
-                                  preferences.setString("deviceId", id);
-                                  // Navigator.pop(context);
-                                },
-                              );
-                            },
+                        ),
+                        MaterialButton(
+                          color: Colors.grey[200],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.list),
+                              SizedBox(
+                                width: 8.0,
+                              ),
+                              Text("Details"),
+                            ],
                           ),
-                        ],
-                      ),
+                          onPressed: () {
+                            setState(
+                              () async {
+                                SharedPreferences preferences =
+                                    await SharedPreferences.getInstance();
+                                preferences.setString("deviceId", id);
+                                Fluttertoast.showToast(msg: "Location set, refresh home page!");
+                                // Navigator.pop(context);
+                              },
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         },
       ),

@@ -22,6 +22,7 @@ class BatteryData with ChangeNotifier {
   String lng = '0';
   String percentage = '0';
   String power = '0';
+  String deviceName = '';
   String url =
       'http://smart-street-light.000webhostapp.com/read_data.php?device_id=';
   bool loading = false;
@@ -30,23 +31,28 @@ class BatteryData with ChangeNotifier {
 
   var data;
 
-  void setId(String id) {
-    print(url);
-    notifyListeners();
-  }
-
   void setLoading() {
     loading = true;
     notifyListeners();
   }
 
+  String getDeviceName() {
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    if (deviceName == "1") {
+      return "Purwosari Street Light";
+    } else {
+      return "UNS Street Light";
+    }
+  }
+
   Future downloadData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    print(url);
+    deviceName = preferences.getString("deviceId");
+    // print(url);
     var response = await http
-        .get(url + preferences.getString("deviceId"))
+        .get(url + deviceName)
         .timeout(Duration(seconds: 10), onTimeout: () {
-      print('to');
+      // print('to');
       loading = false;
       Fluttertoast.showToast(msg: "Request Timeout!");
       return null;

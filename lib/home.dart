@@ -42,23 +42,23 @@ class _HomeState extends State<Home> {
                         padding: EdgeInsets.only(
                           left: 16.0,
                           top: 16.0,
-                          bottom: 5.0,
+                          bottom: 12.0,
                         ),
                         child: Text(
                           'Last Update: ' + batteryData.date,
                           style: TextStyle(fontSize: 14.0),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 16.0,
-                          bottom: 12.0,
-                        ),
-                        child: Text(
-                          'Device ID: ' + batteryData.deviceId,
-                          style: TextStyle(fontSize: 14.0),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(
+                      //     left: 16.0,
+                      //     bottom: 12.0,
+                      //   ),
+                      //   child: Text(
+                      //     'Device ID: ' + batteryData.deviceId,
+                      //     style: TextStyle(fontSize: 14.0),
+                      //   ),
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -302,6 +302,98 @@ class _HomeState extends State<Home> {
                       SizedBox(
                         height: 8.0,
                       ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(bottom: 8.0, left: 16.0, top: 8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.my_location),
+                            SizedBox(
+                              width: 4.0,
+                            ),
+                            Text(
+                              'Location',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                                letterSpacing: 2.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 24.0,
+                        color: Colors.grey[200],
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 42.0),
+                              child: Text(
+                                'Device ID: ' + batteryData.deviceId
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 24.0,
+                        color: Colors.grey[200],
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 42.0),
+                              child: Text(
+                                'Device Name: ' + batteryData.getDeviceName(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 24.0,
+                        color: Colors.grey[200],
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 42.0),
+                              child: Text(
+                                'Latitude: ' + batteryData.lat,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 24.0,
+                        color: Colors.grey[200],
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 42.0),
+                              child: Text(
+                                'Longitude: ' + batteryData.lng,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -327,32 +419,32 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                       SizedBox(
-                        height: 4.0,
+                        height: 8.0,
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          MaterialButton(
-                            color: Colors.grey[200],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Icon(Icons.location_on),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                Text("Street Light Locations"),
-                              ],
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Maps()));
-                            },
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.max,
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: <Widget>[
+                      //     MaterialButton(
+                      //       color: Colors.grey[200],
+                      //       shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(18.0)),
+                      //       child: Row(
+                      //         children: <Widget>[
+                      //           Icon(Icons.location_on),
+                      //           SizedBox(
+                      //             width: 8.0,
+                      //           ),
+                      //           Text("Street Light Locations"),
+                      //         ],
+                      //       ),
+                      //       onPressed: () {
+                      //         Navigator.of(context).push(MaterialPageRoute(
+                      //             builder: (context) => Maps()));
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ],
