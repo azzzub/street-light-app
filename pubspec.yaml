@@ -66,6 +66,7 @@ flutter:
    - assets/images/solarPanel.png
    - assets/images/undrawInfo.png
    - assets/images/undrawMaintenance.png
+   - assets/images/streetLightAva.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

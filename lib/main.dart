@@ -1,6 +1,7 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
+import 'maps.dart';
 import 'settings.dart';
 import 'home.dart';
 import 'info.dart';
@@ -70,21 +71,21 @@ class _HomePageState extends State<HomePage> {
         inactiveIconColor: Colors.red[900],
         initialSelection: 1,
         tabs: [
-          TabData(iconData: Icons.settings, title: "Settings"),
+          TabData(iconData: Icons.location_on, title: "Maps"),
           TabData(iconData: Icons.home, title: "Home"),
           TabData(iconData: Icons.info_outline, title: "Info")
         ],
         onTabChangedListener: (position) {
           setState(() {
             currentPage = position;
-            print(currentPage);
+            // print(currentPage);
           });
         },
       ),
       body: IndexedStack(
         index: currentPage,
         children: <Widget>[
-          Settings(),
+          Maps(),
           Home(),
           Info(),
         ],

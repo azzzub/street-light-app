@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_pju/main.dart';
 import 'battery_data.dart';
 
 class Maps extends StatefulWidget {
@@ -28,7 +27,7 @@ class _MapsState extends State<Maps> {
           id = '1';
           mapsMarker = "Purwosari Street Light";
           // currentlySelectedPin = sourcePinInfo;
-          pinPillPosition = 0;
+          pinPillPosition = 50;
         });
       },
     );
@@ -38,12 +37,14 @@ class _MapsState extends State<Maps> {
       infoWindow: InfoWindow(title: 'UNS Street Light'),
       icon: BitmapDescriptor.defaultMarker,
       onTap: () {
-        setState(() {
-          id = '2';
-          mapsMarker = "UNS Street Light";
-          // currentlySelectedPin = sourcePinInfo;
-          pinPillPosition = 0;
-        });
+        setState(
+          () {
+            id = '2';
+            mapsMarker = "UNS Street Light";
+            // currentlySelectedPin = sourcePinInfo;
+            pinPillPosition = 50;
+          },
+        );
       },
     );
     @override
@@ -102,7 +103,7 @@ class _MapsState extends State<Maps> {
                       height: 70,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                               blurRadius: 20,
@@ -112,11 +113,24 @@ class _MapsState extends State<Maps> {
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text(mapsMarker,
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(width: 8.0),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(20.0, 5.0, 5.0, 5.0),
+                            child: CircleAvatar(
+                              child: Image.asset('/images/streetLightAva.png'),
+                            ),
+                          ),
+                          Container(
+                            width: 100.0,
+                            child: Text(
+                              mapsMarker,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                          ),
                           MaterialButton(
                             color: Colors.grey[200],
                             shape: RoundedRectangleBorder(
@@ -127,7 +141,7 @@ class _MapsState extends State<Maps> {
                                 SizedBox(
                                   width: 8.0,
                                 ),
-                                Text("View Details"),
+                                Text("Details"),
                               ],
                             ),
                             onPressed: () {
@@ -136,7 +150,7 @@ class _MapsState extends State<Maps> {
                                   SharedPreferences preferences =
                                       await SharedPreferences.getInstance();
                                   preferences.setString("deviceId", id);
-                                  Navigator.pop(context);
+                                  // Navigator.pop(context);
                                 },
                               );
                             },

@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      batteryData.t + ' V of 13.4 V',
+                                      batteryData.vTot + ' V of 13.4 V',
                                       style: TextStyle(fontSize: 11.0),
                                     ),
                                   ],
