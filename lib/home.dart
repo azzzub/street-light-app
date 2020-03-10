@@ -7,7 +7,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'all_data.dart';
 import 'battery_data.dart';
 import 'image_controller.dart';
-import 'maps.dart';
 
 class Home extends StatefulWidget {
   @override

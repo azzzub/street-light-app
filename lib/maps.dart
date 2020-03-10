@@ -156,7 +156,7 @@ class _MapsState extends State<Maps> {
                                 SharedPreferences preferences =
                                     await SharedPreferences.getInstance();
                                 preferences.setString("deviceId", id);
-                                Fluttertoast.showToast(msg: "Location set, refresh home page!");
+                                Fluttertoast.showToast(msg: "Location set, refresh the home page!");
                                 // Navigator.pop(context);
                               },
                             );

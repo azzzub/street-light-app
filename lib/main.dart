@@ -2,13 +2,13 @@ import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 import 'maps.dart';
-import 'settings.dart';
 import 'home.dart';
 import 'info.dart';
 
 void main() {
   runApp(
     MaterialApp(
+      title: 'Batex Energy',
       home: HomePage(),
       theme: ThemeData(
         fontFamily: 'MaisonNeue',
